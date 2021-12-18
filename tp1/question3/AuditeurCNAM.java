@@ -1,5 +1,5 @@
 package question3;
-
+import java.lang.*;
 /**
  * NFP121 TpIntroduction, usage de BlueJ et du "Submitter".
  * 
@@ -44,8 +44,38 @@ public class AuditeurCNAM {
      * @return le login du Cnam simplifié, sans les adaptations dues aux
      *         homonymes...
      */
+    
+     public String removeAccent(String x){
+
+     String accents = "àâäãéèêëîïìöôòõüûùÀÂÄÃÉÈÊËÎÏÌÖÔÒÕÜÛÙ";
+     String removeacc = "aaaaeeeeiiioooouuuaaaaeeeeiiioooouuu";
+
+      int l = accents.length();
+      for(int i = 0; i<l ; i++){
+      x = x.replace(accents.charAt(i), removeacc.charAt(i));
+      }
+    return x;
+       }
+    
+       
     public String login() {
-        return "";// à compléter
+      String firstName;
+      String secondName;
+      
+      //6 premières lettres du nom 
+      firstName = this.nom.substring(0,Math.min(this.nom.length(),6));
+      // premier lettre du prenom
+      secondName = this.prenom.substring(0,1);
+      //minuscule
+      firstName = firstName.toLowerCase();
+      secondName = secondName.toLowerCase();
+      //remove accents
+      firstName = removeAccent(firstName);
+      secondName = removeAccent(secondName);
+      
+      firstName = firstName.replaceAll("[^a-z]","_");
+      secondName = secondName.replaceAll("[^a-z]","_");
+      return firstName+"_"+secondName;
     }
 
     /**
@@ -54,7 +84,7 @@ public class AuditeurCNAM {
      * @return son nom
      */
     public String nom() {
-        return null;// à compléter
+        return this.nom;
     }
 
     /**
@@ -63,8 +93,7 @@ public class AuditeurCNAM {
      * @return son prénom
      */
     public String prenom() {
-        return null;// à compléter
-    }
+        return this.prenom;    }
 
     /**
      * Lecture du matricule de l'auditeur.
@@ -72,7 +101,7 @@ public class AuditeurCNAM {
      * @return son matricule
      */
     public String matricule() {
-        return null;// à compléter
+        return this.matricule;
     }
 
     /**
